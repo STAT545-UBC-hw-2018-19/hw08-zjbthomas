@@ -1,0 +1,16 @@
+* {
+    font-family: Georgia,"Times New Roman",Times,serif
+   }
+
+   .main-header .logo {
+    font-family: "Georgia", Times, "Times New Roman", serif;
+    font-weight: bold;
+  }
+   
+   #logo {
+       background: black;
+   }
+
+   .content-wrapper {
+    padding: 5px;
+}

@@ -44,7 +44,19 @@ server <- function(input, output, session) {
                 multiple = TRUE,
                 selected = c("BEER", "WINE"))
   })
+  
+  ## render slider for sweetness
+  output$sweetnessOutput <- renderUI({
+    sliderInput("sweetness", "Sweetness of wine", 0, 10, value = c(0, 10))
+  })
 
+  ## render input box for subtype
+  output$subtypeSelectOutput <- renderUI({
+    selectInput("subtypeInput", "Product subtype",
+                sort(unique(bcl$Subtype[bcl$Type %in% input$typeInput])),
+                multiple = TRUE)
+  })
+  
   ## a conditionalPanel for ascending or descending ordering of price
   output$PriceSortOutput <- renderUI({
     radioButtons("priceSortOrder", "Ascending/Descending",
@@ -52,13 +64,13 @@ server <- function(input, output, session) {
                    "Descending" = "desc"))
   })
   
-  ## get number of options seleteced
+  ## get number of options seleteced (originally implemented)
   output$summaryText <- renderText({
     numOptions <- nrow(prices())
     if (is.null(numOptions)) {
       numOptions <- 0
     }
-    paste0("We found ", numOptions, " options for you")
+    paste0("We found ", numOptions, " options for you!")
   })
   
   ## generate price table
@@ -71,11 +83,23 @@ server <- function(input, output, session) {
     
     # filter by type
     prices <- dplyr::filter(prices, Type %in% input$typeInput)
-    # original functionality: filter by country
+    
+    # filter by sweetness
+    if (length(input$typeInput) == 1 && input$typeInput[1] == "WINE") {
+      prices <- dplyr::filter(prices, Sweetness >= input$sweetness[1],
+                              Sweetness <= input$sweetness[2])
+    }
+    
+    # filter by subtype
+    if (length(input$subtypeInput) != 0) {
+      prices <- dplyr::filter(prices, Subtype %in% input$subtypeInput)
+    }
+    
+    # filter by country
     if (input$filterCountry) {
       prices <- dplyr::filter(prices, Country == input$countryInput)
     }
-    # original functionality: filter by range of price
+    # filter by range of price
     prices <- dplyr::filter(prices, Price >= input$priceInput[1],
                             Price <= input$priceInput[2])
     # add an option to sort the results table by price
@@ -100,7 +124,7 @@ server <- function(input, output, session) {
       return(NULL)
     }
     
-    gp <- ggplot(prices(), aes(Alcohol_Content, fill = Type)) +
+    gp <- ggplot(prices(), aes(prices()[, input$plotType], fill = Type)) +
       # alpha controlled by UI
       geom_histogram(colour = "black", alpha = input$plotAlpha) +
       # color scheme controlled by UI
@@ -109,7 +133,7 @@ server <- function(input, output, session) {
       ) +
       # modify label
       labs(
-        x = "Alchoho Content",
+        x = input$plotType,
         y = "Count"
       ) +
       theme_bw()
@@ -134,6 +158,10 @@ server <- function(input, output, session) {
   
   ## leaflet map
   output$map <- renderLeaflet({
+    if (is.null(prices())) {
+      return(NULL)
+    }
+    
     # modify prices data frame to get info we want
     prices_for_map <- prices() %>%
       # group by country and count
@@ -143,6 +171,11 @@ server <- function(input, output, session) {
         Count = n(),
         AvgPrice = mean(Price)
       )
+    
+    if (is.null(prices_for_map)) {
+      return(NULL)
+    }
+    
     # load json for countries boundaries
     WorldCountry <-geojsonio::geojson_read("./data/countries.geo.json", what = "sp")
     # define color mappings
@@ -176,11 +209,13 @@ server <- function(input, output, session) {
        ),
        # tabPanel for table
        tabPanel("Table",
-        DT::dataTableOutput("prices")
+        DT::dataTableOutput("prices"),
+        # download button (originally implemented)
+        downloadButton("download", "Download results")
        ),
        # tabPanel for map
-       tabPanel("Where are we?",
-        leafletOutput("map")
+       tabPanel("Where are your liquor from?",
+        leafletOutput("map", height = 800)
        )
      )
    } else {
@@ -188,11 +223,13 @@ server <- function(input, output, session) {
        # tabPanel for plot and table
        tabPanel("Plot & Table",
          plotlyOutput("plot"),
-         DT::dataTableOutput("prices")
+         DT::dataTableOutput("prices"),
+         # download button (originally implemented)
+         downloadButton("download", "Download results")
        ),
        # tabPanel for map
-       tabPanel("Where are we from?",
-         leafletOutput("map")
+       tabPanel("Where are your liquor from?",
+         leafletOutput("map", height = 800)
        )
      )
    }
