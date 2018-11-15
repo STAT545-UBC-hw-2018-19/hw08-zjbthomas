@@ -1,3 +1,22 @@
+-   [STAT 545A Homework 08 Repo owned by Junbin
+    ZHANG](#stat-545a-homework-08-repo-owned-by-junbin-zhang)
+    -   [Overview](#overview)
+    -   [Feature implemented](#feature-implemented)
+        -   [Feature 1](#feature-1)
+        -   [Feature 2](#feature-2)
+        -   [Feature 3](#feature-3)
+        -   [Feature 4](#feature-4)
+        -   [Feature 5](#feature-5)
+        -   [Feature 6](#feature-6)
+            -   [Implementation of
+                `leaflet`](#implementation-of-leaflet)
+            -   [Implementation of
+                `shinydashboard`](#implementation-of-shinydashboard)
+        -   [Feature 7](#feature-7)
+        -   [Feature 8](#feature-8)
+        -   [Notes](#notes)
+    -   [References](#references)
+
 STAT 545A Homework 08 Repo owned by Junbin ZHANG
 ================================================
 
@@ -14,8 +33,8 @@ Attali](https://github.com/daattali/shiny-server/tree/master/bcl), and
 the data is retrieved from
 [OpenDataBC](https://www.opendatabc.ca/dataset/bc-liquor-store-product-price-list-current-prices).
 
-This link for this app is
-[here](https://junbinzhang.shinyapps.io/junbinzhang-bcl/), which is
+**The link for this app is
+[here](https://junbinzhang.shinyapps.io/junbinzhang-bcl/)**, which is
 hosted by [shinyapps.io](http://www.shinyapps.io/). This final product
 is only tested under Google Chrome Version 70.0.3538.102 (62-bit). Due
 to the limitation of free account of shinyapps.io, if you encounter any

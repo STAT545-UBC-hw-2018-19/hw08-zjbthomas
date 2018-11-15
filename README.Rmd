@@ -2,6 +2,8 @@
 output:
   md_document:
     variant: markdown_github
+    toc: true
+    toc_depth: 4
 ---
 
 ```{r, echo = FALSE}
@@ -20,7 +22,7 @@ knitr::opts_chunk$set(
 
 An shiny app called "BC Liquor store prices" is developed for uesrs to find liquor based on conditions like prices, types, and countries. This app is originally developed by [Dean Attali](https://github.com/daattali/shiny-server/tree/master/bcl), and the data is retrieved from [OpenDataBC](https://www.opendatabc.ca/dataset/bc-liquor-store-product-price-list-current-prices).
 
-This link for this app is [here](https://junbinzhang.shinyapps.io/junbinzhang-bcl/), which is hosted by [shinyapps.io](http://www.shinyapps.io/). This final product is only tested under Google Chrome Version 70.0.3538.102 (62-bit). Due to the limitation of free account of shinyapps.io, if you encounter any issue accessing the above link, please contact me, thank you.
+**The link for this app is [here](https://junbinzhang.shinyapps.io/junbinzhang-bcl/)**, which is hosted by [shinyapps.io](http://www.shinyapps.io/). This final product is only tested under Google Chrome Version 70.0.3538.102 (62-bit). Due to the limitation of free account of shinyapps.io, if you encounter any issue accessing the above link, please contact me, thank you.
 
 This repo contains the following files:
 
