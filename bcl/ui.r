@@ -12,9 +12,9 @@ ui <- dashboardPage(skin = "black",
   dashboardSidebar(
     width = 300,
     sidebarMenu(
-      menuItem("Welcome!", tabName = "index"),
-      menuItem("Find my liquor!", tabName = "database"),
-      menuItem("Settings", startExpanded = TRUE,
+      menuItem("Welcome!", tabName = "index", icon = icon("home", lib = "glyphicon")),
+      menuItem("Find my liquor!", tabName = "database", icon = icon("glass", lib = "glyphicon")),
+      menuItem("Settings", startExpanded = TRUE, icon = icon("cog", lib = "glyphicon"),
         tabsetPanel(id = "optionTabs", type = "tabs",
           ## tabPanel for sort and filter
           tabPanel("Sort & Filter",
@@ -71,6 +71,16 @@ ui <- dashboardPage(skin = "black",
     tags$head(
       tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
     ),
+    # define a function to open tab
+    tags$script(HTML("
+        var openTab = function(tabName){
+          $('a', $('.sidebar')).each(function() {
+            if(this.getAttribute('data-value') == tabName) {
+              this.click()
+            };
+          });
+        }
+      ")),
     # tabItems
     tabItems(
       # welcome page
@@ -82,7 +92,9 @@ ui <- dashboardPage(skin = "black",
           ),
           # description
           h4(
-            'Had a long day?  This app will help you find the right drink for tonight! Just click on "Find my liquor" and use the filters at the left!'
+            "Had a long day?  This app will help you find the right drink for tonight! Just click on ",
+            a("Find my liquor", onclick = "openTab('database')", href = "#"),
+            " and use the filters at the left!"
           ),
           ## license
           hr(), br(), br(),

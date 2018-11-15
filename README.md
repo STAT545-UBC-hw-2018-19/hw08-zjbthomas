@@ -206,3 +206,5 @@ References
     Choropleths](https://rstudio.github.io/leaflet/choropleths.html)
 -   [Create colorful graphs in R with RColorBrewer and
     Plotly](https://moderndata.plot.ly/create-colorful-graphs-in-r-with-rcolorbrewer-and-plotly/)
+-   [Direct link to tabItem with R shiny
+    dashboard](https://stackoverflow.com/questions/37169039/direct-link-to-tabitem-with-r-shiny-dashboard)
