@@ -202,5 +202,7 @@ References
 -   [world.geo.json](https://github.com/johan/world.geo.json)
 -   [Leaflet for R:
     Colors](https://rstudio.github.io/leaflet/colors.html)
+-   [Leaflet for R:
+    Choropleths](https://rstudio.github.io/leaflet/choropleths.html)
 -   [Create colorful graphs in R with RColorBrewer and
     Plotly](https://moderndata.plot.ly/create-colorful-graphs-in-r-with-rcolorbrewer-and-plotly/)

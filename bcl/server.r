@@ -29,6 +29,9 @@ if (file.exists(filename)) {
   write.csv(bcl, filename, row.names = FALSE)
 }
 
+## load json for countries boundaries
+WorldCountry <-geojsonio::geojson_read("./data/countries.geo.json", what = "sp")
+
 server <- function(input, output, session) {
   ## render input box for country
   output$countrySelectorOutput <- renderUI({
@@ -176,25 +179,48 @@ server <- function(input, output, session) {
       return(NULL)
     }
     
-    # load json for countries boundaries
-    WorldCountry <-geojsonio::geojson_read("./data/countries.geo.json", what = "sp")
+    # copy a S4 object
+    WorldCountry_for_map <- WorldCountry
+    
+    # convert data to upper case and same format
+    prices_for_map <- prices_for_map %>% 
+      # mutate to name
+      mutate(
+        name = toupper(Country)
+      ) %>% 
+      # delete column Country
+      select(-Country)
+    
+    WorldCountry_for_map@data <- WorldCountry_for_map@data %>% 
+      mutate(
+        name = toupper(name)
+      )
+    
+    # filter not found country
+    WorldCountry_for_map <- WorldCountry_for_map[WorldCountry_for_map$name %in% prices_for_map$name, ]
+    
+    # left join to combine two data frames
+    WorldCountry_for_map@data <- left_join(WorldCountry_for_map@data, prices_for_map, by = "name")
+    
     # define color mappings
-    pal <- colorNumeric(palette = "Blues", domain = prices_for_map$Count)
+    pal <- colorNumeric(palette = "Blues", domain = WorldCountry_for_map$Count)
+    
     # create leaflet map
-    map <- leaflet(WorldCountry[WorldCountry$name %in% prices_for_map$Country]) %>%
+    map <- leaflet(WorldCountry_for_map) %>%
       addTiles() %>%
       addPolygons(
-        fillColor = ~pal(prices_for_map$AvgPrice),
+        fillColor = ~pal(Count),
         weight = 1,
         opacity = 0.7,
         color = "black",
         fillOpacity = 1,
         label = stringr::str_c(
-          prices_for_map$Country,
-          " | Number of liquor: ", prices_for_map$Count,
-          " | Average price: ", paste0("$", formatC(as.numeric(prices_for_map$AvgPrice), format="f", digits=2, big.mark=","))
+          WorldCountry_for_map$name,
+          " | Number of liquor: ", WorldCountry_for_map$Count,
+          " | Average price: ", paste0("$", formatC(as.numeric(WorldCountry_for_map$AvgPrice), format="f", digits=2, big.mark=","))
           )
         ) 
+    
     # show final map
     clearBounds(map)
   })
