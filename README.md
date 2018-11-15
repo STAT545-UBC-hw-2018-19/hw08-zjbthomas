@@ -38,7 +38,7 @@ the data is retrieved from
 **The link for this app is
 [here](https://junbinzhang.shinyapps.io/junbinzhang-bcl/)**, which is
 hosted by [shinyapps.io](http://www.shinyapps.io/). This final product
-is only tested under Google Chrome Version 70.0.3538.102 (62-bit). Due
+is only tested under Google Chrome Version 70.0.3538.102 (64-bit). Due
 to the limitation of free account of shinyapps.io, if you encounter any
 issue accessing the above link, please contact me, thank you.
 
