@@ -4,6 +4,8 @@ library(ggplot2)
 library(plotly)
 library(tidyverse)
 library(leaflet)
+library(shinyjs)
+library(RCurl)
 
 ## load the data (retrieve and clean raw data if this is the first time)
 filename <- file.path("data", "bcl-data.csv")
@@ -147,7 +149,7 @@ server <- function(input, output, session) {
   ## interative table (originally implemented)
   output$prices <- DT::renderDataTable({
     prices()
-  })
+  }, selection = 'single')
   
   ## download button (originally implemented)
   output$download <- downloadHandler(
@@ -236,6 +238,8 @@ server <- function(input, output, session) {
        # tabPanel for table
        tabPanel("Table",
         DT::dataTableOutput("prices"),
+        # search button
+        actionButton("search", "Search selected row on Google", icon = icon("search", lib = "glyphicon")),
         # download button (originally implemented)
         downloadButton("download", "Download results")
        ),
@@ -250,6 +254,8 @@ server <- function(input, output, session) {
        tabPanel("Plot & Table",
          plotlyOutput("plot"),
          DT::dataTableOutput("prices"),
+         # search button
+         actionButton("search", "Search selected row on Google", icon = icon("search", lib = "glyphicon")),
          # download button (originally implemented)
          downloadButton("download", "Download results")
        ),
@@ -259,5 +265,20 @@ server <- function(input, output, session) {
        )
      )
    }
+  })
+  
+  ## search function
+  observeEvent(input$search, {
+    # read name of liquor
+    selectedRow <- input$prices_rows_selected
+    
+    if (length(selectedRow)) {
+      liquor_name <- prices()[selectedRow,4]
+      # encode URL
+      url <- paste0("https://google.com/search?q=",curlEscape(liquor_name))
+      print(url)
+      # use runjs in shinyjs to open new window with Google
+      runjs(paste0("window.open('", url, "')"))
+    }
   })
 }

@@ -3,6 +3,7 @@ library(dplyr)
 library(ggplot2)
 library(plotly)
 library(shinydashboard)
+library(shinyjs)
 
 ui <- dashboardPage(skin = "black",
   dashboardHeader(
@@ -17,7 +18,7 @@ ui <- dashboardPage(skin = "black",
       menuItem("Settings", startExpanded = TRUE, icon = icon("cog", lib = "glyphicon"),
         tabsetPanel(id = "optionTabs", type = "tabs",
           ## tabPanel for sort and filter
-          tabPanel("Sort & Filter",
+          tabPanel("Sort & Filter", icon = icon("search", lib = "glyphicon"),
                    # filter by range of price
                    sliderInput("priceInput", "Price", 0, 100, c(25, 40), pre = "$"),
                    # sort by price
@@ -43,7 +44,7 @@ ui <- dashboardPage(skin = "black",
                    )
           ),
           ## tabPanel for changing appearance
-          tabPanel("Appearance",
+          tabPanel("Appearance", icon = icon("heart", lib = "glyphicon"),
                    # provide different plots
                    radioButtons("plotType", "Plot type",
                                 c("Alcohol Content" = "Alcohol_Content",
@@ -67,7 +68,9 @@ ui <- dashboardPage(skin = "black",
     )
   ),
   dashboardBody(
-    #include CSS
+    # include shinyjs
+    useShinyjs(),
+    # include CSS
     tags$head(
       tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
     ),

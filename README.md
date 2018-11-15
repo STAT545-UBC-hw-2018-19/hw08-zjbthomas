@@ -9,6 +9,8 @@
         -   [Feature 5](#feature-5)
         -   [Feature 6](#feature-6)
             -   [Implementation of
+                `shinyjs`](#implementation-of-shinyjs)
+            -   [Implementation of
                 `leaflet`](#implementation-of-leaflet)
             -   [Implementation of
                 `shinydashboard`](#implementation-of-shinydashboard)
@@ -116,12 +118,9 @@ tags$head(
 **Experiment with packages that add extra features to Shiny, such as
 `shinyjs`, `leaflet`, `shinydashboard`, `shinythemes`, `ggvis`.**
 
-In this homework, I implement `leaflet` and `shinydashboard`. I skip the
-other three for the following reasons:
+In this homework, I implement `shinyjs`, `leaflet` and `shinydashboard`.
+I skip the other two for the following reasons:
 
--   For `shinyjs`, the only idea I can think of is to pop up some alert
-    messages. However, they somehow provide bad user experiences, so I
-    decide not to use it.
 -   For `shinythemes`, though it provides many beautiful themes, it is
     not compatibel to `shinydashboard`.
 -   For `ggvis`, I decided to stick to `plotly`, because for the
@@ -129,13 +128,21 @@ other three for the following reasons:
     or `plotly`’s functinalities to replace. I do not notice too many
     suprises in using `ggvis` compared to `plotly`.
 
+#### Implementation of `shinyjs`
+
+A search button is added under the results table. Once it is clicked,
+`runjs()` of `shinyjs` is used to open a new window with Google to
+search the name of a liquor.
+
+![](./images/feature6_1.png)
+
 #### Implementation of `leaflet`
 
 A map is generated using `leaflet`. It highlights countries that have at
 least one result, and shows information of number of resultant liquor
 and average price when users hover on a country.
 
-![](./images/feature6.png)
+![](./images/feature6_2.png)
 
 #### Implementation of `shinydashboard`
 
@@ -208,3 +215,5 @@ References
     Plotly](https://moderndata.plot.ly/create-colorful-graphs-in-r-with-rcolorbrewer-and-plotly/)
 -   [Direct link to tabItem with R shiny
     dashboard](https://stackoverflow.com/questions/37169039/direct-link-to-tabitem-with-r-shiny-dashboard)
+-   [R Shiny: Handle Action Buttons in Data
+    Table](https://stackoverflow.com/questions/45739303/r-shiny-handle-action-buttons-in-data-table)
