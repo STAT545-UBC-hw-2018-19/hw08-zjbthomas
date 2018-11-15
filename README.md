@@ -82,8 +82,11 @@ can check them under “settings” -&gt; “Appearance” tab.
     either Alcohol Content of Price.
 -   Alpha of bars. To show a clearer results, users can modify this
     parameter to see overlapping between different types of products.
--   Color scheme. Qualitative palettes of RColorBrewer are selected, so
-    users can change the solor scheme of the histogram.
+-   Color schemes.
+    -   Qualitative palettes of RColorBrewer are for users to change the
+        color scheme of the histogram.
+    -   Sequaential palettes of RColorBrewer are for users to change the
+        color scheme of the map.
 
 ![](./images/feature3.png)
 

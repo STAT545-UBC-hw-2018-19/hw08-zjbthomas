@@ -52,7 +52,7 @@ ui <- dashboardPage(skin = "black",
                    # add alpha parameter to the plot
                    sliderInput("plotAlpha", "Alpha of bars", 0, 1, value = 0.7),
                    # add color parameter to the plot
-                   radioButtons("fillBrewer", "Color scheme",
+                   radioButtons("fillBrewer", "Color scheme for plot",
                                 c("Set3" = "Set3",
                                   "Set2" = "Set2",
                                   "Set1" = "Set1",
@@ -60,6 +60,14 @@ ui <- dashboardPage(skin = "black",
                                   "Paired" = "Paired",
                                   "Dark2" = "Dark2",
                                   "Accent" = "Accent")),
+                   # add color parameter to the map
+                   radioButtons("mapColor", "Color scheme for map",
+                                c("Red" = "Reds",
+                                  "Purple" = "Purples",
+                                  "Orange" = "Oranges",
+                                  "Grey" = "Greys",
+                                  "Green" = "Greens",
+                                  "Blue" = "Blues")),
                    # fold plot and table into tabs
                    checkboxInput("foldResults", "Fold plot and table into tabs", FALSE)
           )

@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 
 An shiny app called "BC Liquor store prices" is developed for uesrs to find liquor based on conditions like prices, types, and countries. This app is originally developed by [Dean Attali](https://github.com/daattali/shiny-server/tree/master/bcl), and the data is retrieved from [OpenDataBC](https://www.opendatabc.ca/dataset/bc-liquor-store-product-price-list-current-prices).
 
-**The link for this app is [here](https://junbinzhang.shinyapps.io/junbinzhang-bcl/)**, which is hosted by [shinyapps.io](http://www.shinyapps.io/). This final product is only tested under Google Chrome Version 70.0.3538.102 (62-bit). Due to the limitation of free account of shinyapps.io, if you encounter any issue accessing the above link, please contact me, thank you.
+**The link for this app is [here](https://junbinzhang.shinyapps.io/junbinzhang-bcl/)**, which is hosted by [shinyapps.io](http://www.shinyapps.io/). This final product is only tested under Google Chrome Version 70.0.3538.102 (64-bit). Due to the limitation of free account of shinyapps.io, if you encounter any issue accessing the above link, please contact me, thank you.
 
 This repo contains the following files:
 
@@ -57,7 +57,9 @@ In this section, **three sets of parameters are added to the plot.** You can che
 
 - Plot type. For the histogram generated, users can choose to plot either Alcohol Content of Price.
 - Alpha of bars. To show a clearer results, users can modify this parameter to see overlapping between different types of products.
-- Color scheme. Qualitative palettes of RColorBrewer are selected, so users can change the solor scheme of the histogram.
+- Color schemes.
+  - Qualitative palettes of RColorBrewer are for users to change the color scheme of the histogram.
+  - Sequaential palettes of RColorBrewer are for users to change the color scheme of the map.
 
 ![](./images/feature3.png)
 

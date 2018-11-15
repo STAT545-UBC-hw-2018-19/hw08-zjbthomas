@@ -205,7 +205,7 @@ server <- function(input, output, session) {
     WorldCountry_for_map@data <- left_join(WorldCountry_for_map@data, prices_for_map, by = "name")
     
     # define color mappings
-    pal <- colorNumeric(palette = "Blues", domain = WorldCountry_for_map$Count)
+    pal <- colorNumeric(palette = input$mapColor, domain = WorldCountry_for_map$Count)
     
     # create leaflet map
     map <- leaflet(WorldCountry_for_map) %>%
