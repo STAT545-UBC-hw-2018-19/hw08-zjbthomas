@@ -16,6 +16,7 @@
                 `shinydashboard`](#implementation-of-shinydashboard)
         -   [Feature 7](#feature-7)
         -   [Feature 8](#feature-8)
+        -   [Feature 9](#feature-9)
         -   [Notes](#notes)
     -   [References](#references)
 
@@ -69,7 +70,7 @@ the results table by either ascending or descending order.**
 
 An `.gif` is added in the welcome tab.
 
-![](./images/feature2.png)
+![](./bcl/www/logo.gif)
 
 ### Feature 3
 
@@ -135,7 +136,8 @@ I skip the other two for the following reasons:
 
 A search button is added under the results table. Once it is clicked,
 `runjs()` of `shinyjs` is used to open a new window with Google to
-search the name of a liquor.
+search the name of a liquor. If no row is selected, `alert()` of
+`shinyjs` is used to show a message to users.
 
 ![](./images/feature6_1.png)
 
@@ -164,6 +166,18 @@ A slider is added to implement this functionality.
 
 ### Feature 8
 
+**Allow the user to search for multiple alcohol types simultaneously,
+instead of being able to choose only wines/beers/etc.**
+
+This is originally implemented by Dean Attali. However, I modified it
+into using `checkboxGroupInput` instead of `selectInput`, since the
+number of options is not large (only 4), and using `checkboxGroupInput`
+provides a better way for users to select what they want.
+
+![](./images/feature8.png)
+
+### Feature 9
+
 **If you look at the dataset, you’ll see that each product has a “type”
 (beer, wine, spirit, or refreshment) and also a “subtype” (red wine,
 rum, cider, etc.). Add an input for “subtype” that will let the user
@@ -177,7 +191,7 @@ A text input box is added to implement this functionality. In addition,
 if nothing is specified inside, *all* subtypes are used for generating
 the final results.
 
-![](./images/feature8.png)
+![](./images/feature9.png)
 
 ### Notes
 
@@ -196,8 +210,6 @@ implemented” in the source code:
     example, when searching for Italian wines $20-$40, the app would
     show the text “We found 122 options for you”.
 -   Allow the user to download the results table as a `.csv` file.
--   Allow the user to search for multiple alcohol types simultaneously,
-    instead of being able to choose only wines/beers/etc.
 -   Provide a way for the user to show results from *all* countries
     (instead of forcing a filter by only one specific country).
 
