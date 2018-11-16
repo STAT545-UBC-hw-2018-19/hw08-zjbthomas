@@ -47,7 +47,7 @@ A check box is provided to enable the functionality to sort the results table by
 
 An `.gif` is added in the welcome tab.
 
-![](./images/feature2.png)
+![](./bcl/www/logo.gif)
 
 ### Feature 3
 
@@ -118,11 +118,19 @@ A slider is added to implement this functionality.
 
 ### Feature 8
 
+**Allow the user to search for multiple alcohol types simultaneously, instead of being able to choose only wines/beers/etc.**
+
+This is originally implemented by Dean Attali. However, I modified it into using `checkboxGroupInput` instead of `selectInput`, since the number of options is not large (only 4), and using `checkboxGroupInput` provides a better way for users to select what they want.
+
+![](./images/feature8.png)
+
+### Feature 9
+
 **If you look at the dataset, you'll see that each product has a "type" (beer, wine, spirit, or refreshment) and also a "subtype" (red wine, rum, cider, etc.). Add an input for "subtype" that will let the user filter for only a specific subtype of products. Since each type has different subtype options, the choices for subtype should get re-generated every time a new type is chosen. For example, if "wine" is selected, then the subtypes available should be white wine, red wine, etc.**
 
 A text input box is added to implement this functionality. In addition, if nothing is specified inside, *all* subtypes are used for generating the final results.
 
-![](./images/feature8.png)
+![](./images/feature9.png)
 
 ### Notes
 
@@ -132,7 +140,6 @@ The following features are already implemented by Dean Attali, so they are not p
 - The app currently behaves strangely when the user selects filters that return 0 results. For example, try searching for wines from Belgium. There will be an empty plot and empty table generated, and there will be a warning message in the R console. Try to figure out why this warning message is appearing, and how to fix it.
 - Show the number of results found whenever the filters change. For example, when searching for Italian wines \$20-\$40, the app would show the text "We found 122 options for you".
 - Allow the user to download the results table as a `.csv` file.
-- Allow the user to search for multiple alcohol types simultaneously, instead of being able to choose only wines/beers/etc.
 - Provide a way for the user to show results from *all* countries (instead of forcing a filter by only one specific country).
 
 ## References

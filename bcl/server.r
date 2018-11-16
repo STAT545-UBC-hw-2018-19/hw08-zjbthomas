@@ -42,11 +42,10 @@ server <- function(input, output, session) {
                 selected = "CANADA")
   })
   
-  ## render input box for product type
+  ## render input box for product type (changed to checkboxGroupInput instead of selectInput)
   output$typeSelectOutput <- renderUI({
-    selectInput("typeInput", "Product type",
+    checkboxGroupInput("typeInput", "Product type",
                 sort(unique(bcl$Type)),
-                multiple = TRUE,
                 selected = c("BEER", "WINE"))
   })
   
@@ -229,6 +228,10 @@ server <- function(input, output, session) {
   
   ## show plot and table (baed on whether fold or not)
   output$showResults <- renderUI({
+    if (is.null(prices())) {
+      return(NULL)
+    }
+    
    if (input$foldResults) {
      tabsetPanel(id = "resultsTabs", type = "tabs",
        # tabPanel for plot
@@ -239,7 +242,7 @@ server <- function(input, output, session) {
        tabPanel("Table",
         DT::dataTableOutput("prices"),
         # search button
-        actionButton("search", "Search selected row on Google", icon = icon("search", lib = "glyphicon")),
+        actionButton("search", "Search on Google", icon = icon("search", lib = "glyphicon")),
         # download button (originally implemented)
         downloadButton("download", "Download results")
        ),
@@ -255,7 +258,7 @@ server <- function(input, output, session) {
          plotlyOutput("plot"),
          DT::dataTableOutput("prices"),
          # search button
-         actionButton("search", "Search selected row on Google", icon = icon("search", lib = "glyphicon")),
+         actionButton("search", "Search on Google", icon = icon("search", lib = "glyphicon")),
          # download button (originally implemented)
          downloadButton("download", "Download results")
        ),
@@ -279,6 +282,8 @@ server <- function(input, output, session) {
       print(url)
       # use runjs in shinyjs to open new window with Google
       runjs(paste0("window.open('", url, "')"))
+    } else {
+      alert("No liquor is selected!")
     }
   })
 }
